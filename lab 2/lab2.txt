@@ -1,0 +1,61 @@
+Name: Chanwoong Won
+Student #: 1003157139
+Exercises:
+1. ping sends ICMP (internet control message protocol) echo request to the target host server and waits for a ICMP echo reply. 
+
+2. traceroute sends probe packets (udp) and listens for ICMP "time exceeded" gateway. Don't want the destination host to process udp so send the udp packets to an unlikely port.
+
+3. www.utoronto.ca -> max: 9.863ms
+				   -> average: 1.148ms
+				   -> min: 0.768ms
+   www.163.com -> max: 23.077ms
+			   -> average: 21.706ms
+			   -> min: 20.731ms
+
+4. 10000*10^3/(3x10^8)*1000*2 = 66.67ms
+
+This means that I can't possibly be pinging to someone in China but rather a more nearby station that's 3 times closer or only approximately 3333.3 km away from me.
+
+5. Distance from London, UK to Toronto, Canada is approximately 5,709 km according to google
+Min Time: 5709*10^3/(3x10^8)*1000*2 = 38.06ms
+
+6. Average ping time is 79.481ms. This could be a combination of factors such as the host being physically far away, or their connection is bad?
+
+7. ///// Packets at 10 bytes won't send properly so sending 16 bytes instead
+16 bytes: 70 packets transmitted, 70 received, 0% packet loss, time 69041ms
+		  rtt min/avg/max/mdev = 76.723/77.118/80.010/0.535 ms
+10000 bytes: 70 packets transmitted, 70 received, 0% packet loss, time 69104ms
+		  rtt min/avg/max/mdev = 78.856/79.887/85.802/1.082 ms
+
+
+8. 56 (84) bytes
+
+9. 
+ip address of the dns server: 128.100.13.50
+ip address of harvard.com: 64.64.9.47
+
+10. 
+dns server: 1 hop
+server: 11 hops
+
+dns server is meant to redirect you to find your destination server.
+
+11. Currently 47 (2 on established and rest on wait) (check again)
+
+12.	tcp        0      0 ug159.eecg.toront:57942 cnn.com.102.122.2:https ESTABLISHED
+in an http request, tcp handles the transfer.
+
+13. 
+a) 583 ICMP messages received
+b) 11 ICMP echo replies
+c) 48 packets to unknown ports received
+
+14.
+IP Address: 128.100.13.159 (/24 <- port)  
+Ethernet Address: 98:90:96:ca:58:d6
+
+15. Hostname: ug247.eecg.toronto.edu
+
+16. default via 128.100.13.254 dev eno1 
+128.100.13.0/24 dev eno1 proto kernel scope link src 128.100.13.159 
+

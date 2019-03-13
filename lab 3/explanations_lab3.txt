@@ -1,0 +1,19 @@
+# Chanwoong Won, 1003157139 
+
+sim1.o
+R average = 999.878337 bits/s,          tprop average = 0.500162 s
+
+sim2.o
+R average = 999.572329 bits/s,          tprop average = 2.000140 s
+
+sim3.o
+R average = 99.996560 bits/s,   tprop average = 0.100145 s
+
+Process:
+assuming tproc = 0 and tframe = tack
+t_0 = 2*t_prop + 2*n/R
+The unknowns are t_prop and R, using two points, we can find their values.
+Observations:
+No failures likely due to only sending to localhost. 
+R is not the same for all simulators.
+Running the client before the server will make the client wait until timeout for send().

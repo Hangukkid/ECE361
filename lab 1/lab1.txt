@@ -1,0 +1,63 @@
+http.cap
+
+1. 192.168.0.107
+
+2. 192.168.0.1
+
+3. DNS
+
+4. 128.100.72.45
+
+5. TCP
+
+6. 53
+
+7. 54883
+
+8. d8:30:62:62:70:5f
+
+9. 00:13:46:a7:d3:02
+
+10. Packets 3-5 : 0.010502s
+
+11. www.utoronto.ca
+
+12. version 1.1
+
+13. all udp transport protocols where the destination port is 53 (DNS queries)
+
+14. 
+A. 100%
+B. UDP (3.3%) and TCP (96.7%)
+
+15.
+A. 1330 packets/s @ 1s
+B. 73 packets/s @ 5s
+C. 223200 bits/s @ 1s
+
+mystery.pcap
+
+1. packet #50 uses SIP/SDP (session initiation/description protocol) is used for starting a session.
+
+2. packet #55 uses RTP (Real time transport) delivers audio and video over ip networks. Used in communications that stream media. 
+
+3. payload type: ITU-T G.711 PCMU (0) <- audio
+
+4. packets(#55) = 1080bytes/s 
+packets (#1329) = 1113bytes/s
+
+Time elapsed: 12.8s
+Bytes: 2354/100ms * 12.8s = 301312 bytes
+
+5. The person initiating a session and then playing audio
+
+
+
+
+
+
+
+
+
+
+
