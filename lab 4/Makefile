@@ -9,10 +9,10 @@ CFLAGS  = -g -Wall
 all: chatclient chatserver 
 
 chatserver: server.o
-	gcc server.o -o chatserver
+	gcc -pthread server.o -o chatserver
 
 chatclient: client.o
-	gcc client.o -o chatclient
+	gcc -pthread client.o -o chatclient
 
 client.o: client.c 
 	gcc -c client.c 

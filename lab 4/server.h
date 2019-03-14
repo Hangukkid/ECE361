@@ -13,6 +13,8 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <pthread.h>
+#include <malloc.h>
 
 // #define PORT "3490"  // the port users will be connecting to
 
@@ -21,6 +23,7 @@
 struct client {
     int sockfd;
     char *username;
+    pthread_t thread;
     struct client *next;
 };
 
@@ -33,6 +36,7 @@ typedef struct {
 } server;
 
 server *m;
+pthread_mutex_t server_lock;
 
 void sigchld_handler(int s) {
     // waitpid() might overwrite errno, so we save and restore it:
@@ -42,7 +46,6 @@ void sigchld_handler(int s) {
 
     errno = saved_errno;
 }
-
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa) {
@@ -120,10 +123,13 @@ int setupServer (char *s, char *portNum) {
     return sockfd;
 }
 
-void handle_client (client *new_client);
-void client_login (client *c);
-void client_logout (char *username);
+void *handle_client (void *cl);
+int client_login (client *c);
+void client_logout (int sockfd);
 client *find_client (char *username); 
 char *client_to_string(client *c);
+int find_blankspace (char *buf);
+void send_message_to_client (client *from, client *c, char *message);
+void send_error_message_to_client (client *to, int error);
 
 #endif
