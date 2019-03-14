@@ -124,6 +124,6 @@ void handle_client (client *new_client);
 void client_login (client *c);
 void client_logout (char *username);
 client *find_client (char *username); 
-char *get_all_users ();
+char *client_to_string(client *c);
 
 #endif

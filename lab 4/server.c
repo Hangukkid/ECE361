@@ -2,9 +2,16 @@
 #include <pthread.h>
 #include <malloc.h>
 
-char *get_all_users () {
-    
+char *client_to_string(client *c) {
+    char ending[] = "\n";
+    char *client_string = (char *) malloc(sizeof(char) * (strlen(c -> username) + 10));
+    c -> username;
+    strcpy(client_string, c -> username);
+    strcat(client_string, ending);
+
+    return client_string;
 }
+
 
 void handle_client (client *new_client) {
     char buf[100] = "";
@@ -35,9 +42,20 @@ void handle_client (client *new_client) {
                 printf("message: %s\n", message);
             }
         } else if (!strcmp (buf, list)) {
-            printf("print out list.\n");
+            char users_list[3000] = "List of users:\n"; 
+            for (client *c = m -> all_clients; c != NULL; c = c -> next) {
+                strcat(users_list, client_to_string(c));
+            }
+            if (send(new_client -> sockfd, users_list, 3000, 0) == -1) {
+                perror("send");
+                exit(1);
+            }
         } else if (!strcmp (buf, exits)) {
-            printf("Goodbye.\n");
+            printf("Goodbye %s!\n", new_client -> username);
+            if (send(new_client -> sockfd, buf, 100, 0) == -1) {
+                perror("send");
+                exit(1);
+            }
             return;
         } else {
 
@@ -67,6 +85,11 @@ void client_logout (char *username) {
 }
 
 client *find_client (char *username) {
+    for (client *c = m -> all_clients; c != NULL; c = c -> next) {
+        if (!strcmp(c -> username, username)) {
+            return c;
+        }
+    }
     return NULL;
 }
 

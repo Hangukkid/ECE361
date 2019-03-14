@@ -11,8 +11,18 @@ char *remove_whitespace (const char *string) {
     return final;
 }
 
+int expecting_response (char *buf) {
+    char list[] = "list";
+    char exits[] = "exit";
+    if (!strcmp (buf, list)) return 1;
+    if (!strcmp (buf, exits)) return 2;
+    
+    return 0; 
+}
+
 void client_to_server (int sockfd, char *username) {
-    char buffer[100] = "";
+    char buf[100] = "";
+    int numbytes;
 
     // username
     if (send(sockfd, username, strlen(username), 0) == -1) {
@@ -22,15 +32,30 @@ void client_to_server (int sockfd, char *username) {
 
     while (1) {
         printf("input: ");
-        scanf("%[^\n]%*c", buffer);
-        if(recv(sockfd, buffer, sizeof(buffer), MSG_PEEK | MSG_DONTWAIT) == 0) {
+        scanf(" %[^\n]%*c", buf);   
+        if(recv(sockfd, buf, sizeof(buf), MSG_PEEK | MSG_DONTWAIT) == 0) {
             printf("server has unexpectedly closed.\n");
             return;
         }
-        if (send(sockfd, remove_whitespace(buffer), 100, 0) == -1) {
+        int expecting = expecting_response (remove_whitespace(buf));
+        if (send(sockfd, remove_whitespace(buf), 100, 0) == -1) {
             perror("send");
             exit(1);
         }  
+        // reset buffer
+        memset(buf, 0, 100);  
+        if (expecting) {
+            if ((numbytes = recv(sockfd, buf, 100, 0)) == -1) {
+                perror("recv");
+                exit(1);
+            }
+            if (expecting == 1) {
+                printf ("%s", buf);
+            } else {
+                printf ("Exiting Client.\n");
+                exit(1);
+            }
+        }
     }
 
 }
