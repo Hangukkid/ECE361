@@ -1,0 +1,19 @@
+# Chanwoong Won, 1003157139
+Q1:
+No successful pings.
+
+Q3: shows the two new connections that were just created. 
+cookie, duration, table, # packets, # bytes, in port and its action
+
+Q4:
+successful pings now since there is a direct flow between h1 and h2.
+
+Q5:
+creates a new entry with same entries as the flow created in Q2 except instead 
+of in_port, there is priority,dl_dst and dl_type.
+
+Q6:
+1 -> 2 and 2 -> 1 works
+1 -> 3 and 2 -> 3 don't works (3 is still unconnected)
+
+n_packets for 1st and 2nd go up by 5.
