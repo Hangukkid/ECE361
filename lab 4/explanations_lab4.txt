@@ -1,0 +1,12 @@
+#Chanwoong Won, 1003157139
+
+concurrency:
+I implemented concurrency on the server using threads. 
+For every client there is a thread that handles interaction with the server.
+
+Select waits for input like polling operation whereas the threads can handle functions concurrently.
+While thread can use sleep functionality to reduce CPU waste, select will just poll for a while 
+which guarantees some CPU waste if the user is slow to input.
+
+The server handles messages between clients. More stress on the server side and 
+less on the client side.

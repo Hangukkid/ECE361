@@ -110,5 +110,19 @@ def dijkstras(macHostA, macHostB):
     return pathAtoB
 
 
+def validateMAC(mac):
+    invalidMAC = re.findall('[^0-9a-f:]', mac.lower()) or len(mac) != 17
+    if (invalidMAC):
+        raise ValueError("MAC address %s has an invalid format." % mac)
 
+    return mac.lower()
 
+if __name__ == '__main__':
+    if (len(sys.argv) != 3):
+        print "This script installs bi-directional flows between two hosts"
+        print "Expected usage: install_path.py <hostA's MAC> <hostB's MAC"
+    else:
+        macHostA = validateMAC(sys.argv[1])
+        macHostB = validateMAC(sys.argv[2])
+
+        sys.exit(main(macHostA, macHostB))

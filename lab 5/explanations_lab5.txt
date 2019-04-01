@@ -14,6 +14,6 @@ of in_port, there is priority,dl_dst and dl_type.
 
 Q6:
 1 -> 2 and 2 -> 1 works
-1 -> 3 and 2 -> 3 don't works (3 is still unconnected)
+1 -> 3 and 2 -> 3 don't work (3 is still unconnected)
 
 n_packets for 1st and 2nd go up by 5.
